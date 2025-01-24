@@ -18,9 +18,24 @@
             max-width: 1200px;
             margin: auto;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.4); /* Adjusted to fade 2 points more */
+            position: relative;
             padding: 1rem;
             border-radius: 10px;
+        }
+        .container::before {
+            content: "";
+            background: rgba(255, 255, 255, 0.4); /* Adjusted to fade 2 points more */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 10px;
+            z-index: 0;
+        }
+        .container > * {
+            position: relative;
+            z-index: 1;
         }
         header {
             color: #000000;
@@ -72,10 +87,25 @@
             margin-top: 1.25rem;
         }
         .contact {
-            background: none; /* Remove the separate background */
-            color: #fff;
+            position: relative;
             padding: 1.25rem;
             margin-top: 1.25rem;
+            color: #fff;
+        }
+        .contact::before {
+            content: "";
+            background: rgba(0, 0, 0, 0.6); /* Black faded background */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            border-radius: 10px;
+        }
+        .contact > * {
+            position: relative;
+            z-index: 1;
         }
         .contact h2 {
             margin-top: 0;
