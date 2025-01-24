@@ -27,18 +27,31 @@
             padding: 2rem 0;
             min-height: 70px;
             border-bottom: #77aaff 3px solid;
+            position: relative;
         }
         .header-content {
-            background: url('https://upload.wikimedia.org/wikipedia/commons/2/28/Flag_of_Puerto_Rico.svg') no-repeat left center;
-            background-size: cover;
+            position: relative;
             padding: 2rem;
             text-align: left;
+        }
+        .header-content::before {
+            content: "";
+            background: url('https://upload.wikimedia.org/wikipedia/commons/2/28/Flag_of_Puerto_Rico.svg') no-repeat left center;
+            background-size: cover;
             opacity: 0.5; /* Adjust this value to control the fade effect */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
         }
         .header-content h1 {
             font-size: 4rem; /* Twice the default size */
             line-height: 1.2; /* Adjust line height for better spacing */
             color: #000; /* Make the header text solid black */
+            position: relative;
+            z-index: 1;
         }
         header a {
             color: #fff;
