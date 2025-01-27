@@ -37,7 +37,7 @@
         .form-container label {
             margin-bottom: 0.5rem;
         }
-        .form-container input {
+        .form-container input, .form-container textarea {
             margin-bottom: 1rem;
             padding: 0.5rem;
             border: 1px solid #ccc;
@@ -59,24 +59,18 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Registration Form</h2>
+        <h2>Contactanos</h2>
         <form action="#" method="post">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
-            
-            <label for="rol">Rol:</label>
-            <input type="text" id="rol" name="rol" required>
-            
-            <label for="compania">Compañia:</label>
-            <input type="text" id="compania" name="compania" required>
-            
+           
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
+                    
+            <label for="comentarios">Comentarios:</label>
+            <textarea id="comentarios" name="comentarios" rows="4"></textarea>
             
-            <label for="telefono">Número de Contacto:</label>
-            <input type="tel" id="telefono" name="telefono" required>
-            
-            <button type="submit">Register</button>
+            <button type="submit">Contactar</button>
         </form>
     </div>
 </body>
