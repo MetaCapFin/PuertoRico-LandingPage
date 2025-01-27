@@ -151,6 +151,55 @@
                 padding: 0.75rem;
             }
         }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .form-container {
+            padding: 1.25rem;
+            margin-top: 1.25rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+        .form-container h2 {
+            margin-top: 0;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container label {
+            margin-bottom: 0.5rem;
+        }
+        .form-container input, .form-container textarea {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -177,11 +226,12 @@
             <h2>¡Trabajemos juntos para implementar el PELEP y asegurar un futuro mejor para la isla!</h2>
                 <p>Estamos listos para colaborar y compartir los detalles de esta propuesta innovadora que puede marcar un antes y un después para Puerto Rico. <strong>Contáctenos hoy mismo para iniciar el diálogo y tomar acción concreta.</strong>.</p>
                 <p>Juntos, podemos construir una Puerto Rico más fuerte, resiliente y sostenible.</p>
+                <a href="#registration-form" class="button">Register Now</a>
         </section>
         <section class="contact" id="contact">
             <h2>Contactenos</h2>
             <p>Email: <a href="mailto:carlos.alvarez@ygrene.com">carlos.alvarez@ygren.com</a></p>
         </section>
-    </div>
-</body>
-</html>
+        <section class="form-container" id="registration-form">
+            <h2>Registration Form</h2>
+            <form action
