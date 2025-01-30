@@ -103,7 +103,7 @@
             });
 
             if (!valid) {
-                alert('Please fill in all fields.');
+                alert('Por favor, complete todos los campos.');
                 return;
             }
 
@@ -115,10 +115,10 @@
                 if (response.ok) {
                     window.location.href = 'thankyou.html';
                 } else {
-                    alert('There was an error submitting the form. Please try again.');
+                    alert('Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.');
                 }
             }).catch(error => {
-                alert('There was an error submitting the form. Please try again.');
+                alert('Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.');
             });
         }
     </script>
