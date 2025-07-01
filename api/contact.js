@@ -24,9 +24,13 @@ export default async function handler(req, res) {
 
     const columnValues = {
       text_mkmkt1wj: nombre,
-      email_mkmkjje1: email,
-      long_text_mkmkb82h: comentarios // ✅ PLAIN STRING — not { text: ... }
+      email_mkmkjje1: {
+        email: email,
+        text: email
+      },
+      long_text_mkmkb82h: comentarios
     };
+
 
     const variables = {
       boardId: "8333309683",
