@@ -10,28 +10,37 @@ export default async function handler(req, res) {
   }
 
   try {
+    const query = `
+      mutation CreateItem($boardId: Int!, $itemName: String!, $columnVals: JSON!) {
+        create_item (
+          board_id: $boardId,
+          item_name: $itemName,
+          column_values: $columnVals
+        ) {
+          id
+        }
+      }
+    `;
+
+    const variables = {
+      boardId: 8333309683,
+      itemName: nombre,
+      columnVals: {
+        text_mkmkt1wj: nombre,
+        email_mkmkjje1: email,
+        long_text_mkmkb82h: { text: comentarios } // ✅ long text requires an object with "text"
+      }
+    };
+
     const response = await fetch('https://api.monday.com/v2', {
       method: 'POST',
       headers: {
-        'Authorization': process.env.MONDAY_API_KEY, // use env var in .env or Vercel
+        'Authorization': process.env.MONDAY_API_KEY,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: `
-          mutation {
-            create_item (
-              board_id: 8333309683,
-              item_name: "${nombre}",
-              column_values: "${JSON.stringify({
-                text_mkmkt1wj: nombre,
-                email_mkmkjje1: email,
-                long_text_mkmkb82h: comentarios
-              }).replace(/"/g, '\\"')}"
-            ) {
-              id
-            }
-          }
-        `,
+        query,
+        variables,
       }),
     });
 
