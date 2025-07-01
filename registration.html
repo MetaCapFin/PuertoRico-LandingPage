@@ -93,6 +93,22 @@
             const inputs = form.querySelectorAll('input, textarea');
             let valid = true;
 
+            fetch(form.action, {
+                method: form.method,
+                body: data,
+            })
+            .then(response => response.json())
+            .then(json => {
+                if (json.message) {
+                    window.location.href = 'thankyou.html';
+                } else {
+                    alert(json.error || 'Hubo un error...');
+                }
+            })
+            .catch(error => {
+                alert('Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.');
+            });
+            
             inputs.forEach(input => {
                 if (!input.value) {
                     input.classList.add('error');
@@ -126,7 +142,7 @@
 <body>
     <div class="form-container">
         <h2>Contactanos</h2>
-        <form action="https://hooks.zapier.com/hooks/catch/20787888/2ftg0vt/" method="post" onsubmit="handleSubmit(event)">
+        <form action="/api/contact" method="post" onsubmit="handleSubmit(event)">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
            
