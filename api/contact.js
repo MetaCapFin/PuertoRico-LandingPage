@@ -25,15 +25,13 @@ export default async function handler(req, res) {
     const columnValues = {
       text_mkmkt1wj: nombre,
       email_mkmkjje1: email,
-      long_text_mkmkb82h: {
-        text: comentarios
-      }
+      long_text_mkmkb82h: comentarios // ✅ PLAIN STRING — not { text: ... }
     };
 
     const variables = {
       boardId: "8333309683",
       itemName: nombre,
-      columnVals: JSON.stringify(columnValues) // ✅ Required by Monday.com
+      columnVals: JSON.stringify(columnValues)
     };
 
     const response = await fetch('https://api.monday.com/v2', {
@@ -42,10 +40,7 @@ export default async function handler(req, res) {
         'Authorization': process.env.MONDAY_API_KEY,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
+      body: JSON.stringify({ query, variables }),
     });
 
     const data = await response.json();
@@ -62,5 +57,6 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Error del servidor.' });
   }
 }
+
 
 
