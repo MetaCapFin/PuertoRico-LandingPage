@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
   try {
     const query = `
-      mutation CreateItem($boardId: Int!, $itemName: String!, $columnVals: JSON!) {
+      mutation CreateItem($boardId: ID!, $itemName: String!, $columnVals: JSON!) {
         create_item (
           board_id: $boardId,
           item_name: $itemName,
