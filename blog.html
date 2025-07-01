@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog PELEP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://www.ecowatch.com/wp-content/uploads/2022/03/GettyImages-119014359-scaled.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 3rem auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #007BFF;
+    }
+    .post-title {
+      color: #000;
+      font-size: 2rem;
+    }
+    .post-date {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+    .post-content {
+      color: #000;
+      line-height: 1.6;
+    }
+    .nav-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .nav-buttons button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .nav-buttons button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Noticias y Actualizaciones PELEP</h1>
+    <div id="blog-post">
+      <h2 class="post-title" id="post-title">Cargando...</h2>
+      <div class="post-date" id="post-date"></div>
+      <div class="post-content" id="post-content"></div>
+    </div>
+    <div class="nav-buttons">
+      <button onclick="loadNewerPost()">← Más reciente</button>
+      <button onclick="loadOlderPost()">Más antiguo →</button>
+    </div>
+  </div>
 
+  <script>
+    let postIndex = [];
+    let currentIndex = 0;
+
+    async function fetchPostIndex() {
+      const res = await fetch('posts/post-index.json');
+      postIndex = await res.json();
+    }
+
+    async function loadPost(index) {
+      if (index < 0 || index >= postIndex.length) return;
+      currentIndex = index;
+      const postFile = postIndex[currentIndex];
+      const res = await fetch(`posts/${postFile}`);
+      const post = await res.json();
+      document.getElementById('post-title').textContent = post.title;
+      document.getElementById('post-date').textContent = post.date;
+      document.getElementById('post-content').innerHTML = post.content;
+    }
+
+    function loadOlderPost() {
+      if (currentIndex < postIndex.length - 1) {
+        loadPost(currentIndex + 1);
+      }
+    }
+
+    function loadNewerPost() {
+      if (currentIndex > 0) {
+        loadPost(currentIndex - 1);
+      }
+    }
+
+    async function init() {
+      await fetchPostIndex();
+      loadPost(0); // Start with most recent
+    }
+
+    init();
+  </script>
+</body>
+</html>
