@@ -88,55 +88,40 @@
     </style>
     <script>
         function handleSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const inputs = form.querySelectorAll('input, textarea');
-            let valid = true;
-
-            fetch(form.action, {
-                method: form.method,
-                body: data,
-            })
+          event.preventDefault();
+          const form = event.target;
+        
+          const nombre = form.nombre.value.trim();
+          const email = form.email.value.trim();
+          const comentarios = form.comentarios.value.trim();
+        
+          if (!nombre || !email || !comentarios) {
+            alert('Por favor, complete todos los campos.');
+            return;
+          }
+        
+          const data = { nombre, email, comentarios }; // ✅ define before using
+        
+          fetch(form.action, {
+            method: form.method,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
             .then(response => response.json())
             .then(json => {
-                if (json.message) {
-                    window.location.href = 'thankyou.html';
-                } else {
-                    alert(json.error || 'Hubo un error...');
-                }
+              if (json.message) {
+                window.location.href = 'thankyou.html';
+              } else {
+                alert(json.error || 'Hubo un error al enviar el formulario.');
+              }
             })
-            .catch(error => {
-                alert('Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.');
-            });
-            
-            inputs.forEach(input => {
-                if (!input.value) {
-                    input.classList.add('error');
-                    valid = false;
-                } else {
-                    input.classList.remove('error');
-                }
-            });
-
-            if (!valid) {
-                alert('Por favor, complete todos los campos.');
-                return;
-            }
-
-            const data = new FormData(form);
-            fetch(form.action, {
-                method: form.method,
-                body: data,
-            }).then(response => {
-                if (response.ok) {
-                    window.location.href = 'thankyou.html';
-                } else {
-                    alert('Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.');
-                }
-            }).catch(error => {
-                alert('Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.');
+            .catch(() => {
+              alert('Hubo un error al enviar el formulario. Por favor, inténtelo de nuevo.');
             });
         }
+        
     </script>
 </head>
 <body>
