@@ -22,14 +22,18 @@ export default async function handler(req, res) {
       }
     `;
 
-    const variables = {
-      boardId: 8333309683,
-      itemName: nombre,
-      columnVals: {
-        text_mkmkt1wj: nombre,
-        email_mkmkjje1: email,
-        long_text_mkmkb82h: { text: comentarios } // ✅ long text requires an object with "text"
+    const columnValues = {
+      text_mkmkt1wj: nombre,
+      email_mkmkjje1: email,
+      long_text_mkmkb82h: {
+        text: comentarios
       }
+    };
+
+    const variables = {
+      boardId: "8333309683",
+      itemName: nombre,
+      columnVals: JSON.stringify(columnValues) // ✅ Required by Monday.com
     };
 
     const response = await fetch('https://api.monday.com/v2', {
@@ -58,4 +62,5 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Error del servidor.' });
   }
 }
+
 
